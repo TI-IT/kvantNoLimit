@@ -1,0 +1,252 @@
+Подготовка
+Установите Node.JS
+
+Установите Git
+
+Установите Webstorm
+
+Создайте аккаунт на GitHub
+
+Создайте облачный веб-сервер на SimpleCloud или в другом месте. Например, в VScale, Джино, Selectel, Hetzner и т.п.
+
+Купите домен на Trust host или в другом месте.
+
+Команды для вашего компьютера
+<ip> - ip-адрес вашего сервера
+
+<name> - название вашего проекта
+
+Windows
+Откройте командную строку(в поиске cmd) и выполнить команды
+
+cd ~/.ssh/
+
+mkdir servers
+
+cd servers
+
+mkdir <name>
+
+cd <name>
+
+ssh-keygen -f <name>
+
+*Пароль не устанавливать
+
+type <name>.pub | ssh root@<ip> "cat >> .ssh/authorized_keys"
+
+*Введите пароль от сервера вручную, если копируете, вставляете и получаете Permission Denied
+
+type nul >> "config"
+
+start .
+
+Откроется папка, откройте в ней файл config с помощью блокнота
+
+Добавьте в файл конфигурацию
+
+Host <name>
+	hostname <ip>
+	user root
+	IdentityFile ~/.ssh/servers/<name>/<name>
+Подключаться к серверу теперь можно из командной строки по команде
+
+ssh <name>
+
+Mac OS и Linux
+Откройте терминал и выполните команды:
+
+cd ~/.ssh/
+
+mkdir servers
+
+cd servers
+
+mkdir <name>
+
+cd <name>
+
+ssh-keygen -f <name>
+
+*Пароль не устанавливать
+
+cat <name> .pub | ssh root@<ip> "cat >> .ssh/authorized_keys"
+
+touch ~/.ssh/config
+
+open ~/.ssh/config
+
+Добавьте в файл конфигурацию
+
+Host <name>
+	hostname <ip>
+	user root
+	IdentityFile ~/.ssh/servers/<name>/<name>
+Подключаться к серверу теперь можно из терминала по команде
+
+ssh <name>
+
+Команды для облачного сервера
+не забудьте предварительно подключиться к серверу через ssh
+
+Установка Node.JS
+Полная инструкция https://github.com/nvm-sh/nvm
+
+Команды для установки
+
+cd ~
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+source ~/.nvm/nvm.sh
+
+nvm install node
+
+Проверить установку (должна появиться версия Node.JS)
+
+nvm run node --version
+
+Установка Nginx
+apt update
+
+apt install vim
+
+apt install nginx
+
+cd /etc/nginx/sites-available
+
+touch <url> (пример touch pubgmoney.ru - важно указать верный домен вашего сайта)
+
+vim <url>
+
+Нажмите I (после появится надпись INSERT в нижнем левом углу)
+
+Вставьте такие блоки
+
+
+server {
+	listen       80;
+	server_name kvantnolimit.ru www.kvantnolimit.ru;
+	
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+server {
+	listen       80;
+	server_name api.kvantnolimit.ru;
+	
+    location / {
+        proxy_pass http://localhost:9001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+Нажмите ESC
+
+Введите :x и нажмите Enter
+
+Отредактируйте файл nginx.conf, введите команду
+
+vim /etc/nginx/nginx.conf
+
+Раскомментируйте строку
+
+server_names_hash_bucket_size 64;
+
+добавьте строку:
+
+include /etc/nginx/sites-enabled/<url>;
+
+закомментируйте или удалите строку:
+
+include /etc/nginx/sites-enabled/*
+
+Сохраните файл (Esc, :x, Enter)
+
+Проверьте верность конфигурации
+
+nginx -t
+
+Если нет ошибок, запустите Nginx командой
+
+service nginx start
+
+Можно проверить состояние Nginx командой
+
+service nginx status
+
+Выйти из проверки статуса можно с помощью Ctrl+C
+
+Установка SSL сертификата
+Сходите на Simplecloud и добавьте DNS-сервер (домен)
+
+api.<url> (пример api.pubgmoney.ru)
+
+Теперь в командной строке удаленного сервера введите
+
+apt update && apt upgrade
+
+apt install snapd
+
+snap install core; snap refresh core
+
+apt-get remove certbot
+
+ln -s /snap/bin/certbot /usr/bin/certbot
+
+snap install --classic certbot
+
+certbot --nginx -d www.<url> -d <url> -d api.<url>
+
+(пример certbot --nginx -d www.pubgmoney.ru -d pubgmoney.ru -d api.pubgmoney.ru)
+
+certbot renew --dry-run
+
+GitHub Actions
+Код файла ./github/workflows/deploy.yml — здесь
+
+Исходный код здесь
+
+Чтобы исходный код запустился, откройте его в WebStorm, откройте 2 терминала.
+
+в первом введите:
+
+cd api
+
+npm install
+
+npm run dev
+
+в браузере откройте http://localhost:9001
+
+во втором введите
+
+npm client
+
+npm install
+
+npm run start
+
+в браузере откройте http://localhost:3000
+
+Что почитать и посмотреть после урока
+Введите запросы в Google или YouTube и выберите что больше нравится:
+
+Git что это
+
+Бэкенд и фронтенд что это
+
+http протокол
+
+P.S. Не стесняйтесь задавать вопросы в комментариях
