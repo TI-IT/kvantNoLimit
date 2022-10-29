@@ -37,7 +37,7 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd ~/PubgMoney/client
+            cd ~/kvantnolimit/client
             npm install
             npm run build
             pm2 restart client
