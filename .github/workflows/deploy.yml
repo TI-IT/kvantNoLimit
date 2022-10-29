@@ -1,3 +1,7 @@
+# Action
+# [need build client]
+# [need deploy server]
+
 name: deploy
 
 on:
