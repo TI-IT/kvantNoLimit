@@ -18,7 +18,7 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd ~/kvantNoLimit
+            cd ~/kvantnolimit
             git reset --hard origin/master
             git pull
   build-client:
