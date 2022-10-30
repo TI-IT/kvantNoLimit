@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.menu {
+  top: 10px;
+}
+.menu span {
+  padding: 10px;
+}
+.container {
+  margin: 0 10%;
+}
+.text-center {
+  text-align: center;
+}
+form.sign-up {
+  margin-top: 50px;
+}
+form.sign-up input{
+  font-size: 18px;
+  padding: 5px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}

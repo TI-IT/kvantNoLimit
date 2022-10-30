@@ -6,9 +6,14 @@ const schema = new Schema({
     type: String
   },
   username: {
-    type: String
+    type: String,
+    unique: true
+  },
+  role: {
+    type: String,
+    default: 'user'
   }
 }, {autoCreate: true})
 
-const User = mongoose.model('user', schema)
-model.exports = User
+const User = mongoose.model('users', schema)
+module.exports = User
