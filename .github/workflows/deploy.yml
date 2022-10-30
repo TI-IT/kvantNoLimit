@@ -1,7 +1,3 @@
-# Action
-# [need build client]
-# [need deploy server]
-
 name: deploy
 
 on:
@@ -23,7 +19,7 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd ~/kvantnolimit
-            git reset --hard origin/master
+            git reset --hard origin/main
             git pull
   build-client:
     if: "contains(github.event.commits[0].message, '[need build client]')"
