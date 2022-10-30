@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update Files
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@main
         with:
           host: ${{secrets.HOST}}
           username: ${{ secrets.USERNAME }}
@@ -19,7 +19,7 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd ~/kvantnolimit
-            git reset --hard origin/master
+            git reset --hard origin/main
             git pull
   build-client:
     if: "contains(github.event.commits[0].message, '[need build client]')"
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Client
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@main
         with:
           host: ${{secrets.HOST}}
           username: ${{ secrets.USERNAME }}
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@main
         with:
           host: ${{secrets.HOST}}
           username: ${{ secrets.USERNAME }}
