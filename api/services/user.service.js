@@ -3,16 +3,17 @@ const dbConnect = require("./dbConnect")
 const User = require('../models/User')
 
 
-async function addUserToDb() {
+async function save(user) {
   await dbConnect();
 
   const collection = mongoose.model('users');
 
   await collection.create({
-    username: "Tigran3",
-    password: "123456",
+    email: user.email,
+    password: user.password,
+    user: 'user' + Date.now(),
     role: 'user'
   })
 }
 
-module.exports = {addUserToDb}
+module.exports = {save}

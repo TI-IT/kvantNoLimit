@@ -12,10 +12,9 @@ export default function SignUp() {
       ...user,
       [name] : value
     })
-    console.log(user)
   }
 
-  function signUp () {
+  async function signUp () {
     setMessage('')
     if(!user.email || !user.password || !secondPassword) {
       setMessage("Заполните все поля")
@@ -30,6 +29,26 @@ export default function SignUp() {
       setMessage("Email не верный")
       return
     }
+
+    //передаем запрос на бекент
+    const res = await fetch('http://localhost:9001/users/signup', {
+      method: 'post',
+      credentials: 'include',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await res.json();
+
+    if (data.ok) {
+      setMessage('')
+      setMessage('регистрация прошла успешно.')
+    }else {
+      setMessage('')
+      setMessage('Ошибка попробуйте другие данные')
+    }
+    console.log(data);
   }
 
   return (

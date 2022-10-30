@@ -1,16 +1,19 @@
 const express = require('express');
-const { addUserToDb } = require('../services/user.service');
+const { addUserToDb, save } = require('../services/user.service');
 const router = express.Router();
 
 router.get('/', (req, res) => {
   res.json({ok: true, users: "123"})
 })
 
-router.get('/signup', async (req, res) => {
-
-  await addUserToDb();
-
-  res.json({ok: true, user: req.params.id})
+router.post('/signup', async (req, res) => {
+  const user = req.body;
+  try {
+    await save(user)
+    res.json({ok: true})
+  }catch (e) {
+    res.json({ok: false})
+  }
 })
 
 module.exports = router;
