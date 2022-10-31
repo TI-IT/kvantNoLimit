@@ -7,6 +7,7 @@ export default function Menu() {
       <span><NavLink to={'/login'}>Вход</NavLink></span>
       <span><NavLink to={'/signup'}>Регистрация</NavLink></span>
       <span><NavLink to={'/users'}>Пользователи</NavLink></span>
+      <span><NavLink to={'/dashboard'}>Личный кабинет</NavLink></span>
     </div>
   )
 }

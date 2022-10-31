@@ -24,12 +24,25 @@ code {
 .text-center {
   text-align: center;
 }
-form.sign-up {
+form.sign-up, form.login{
   margin-top: 50px;
 }
-form.sign-up input{
+form.sign-up input, form.login input{
   font-size: 18px;
   padding: 5px;
   margin-bottom: 15px;
   font-weight: bold;
+}
+form.sign-up label{
+  text-align: left;
+}
+
+form.sign-up button, form.login button {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: blanchedalmond;
+  color: black;
+  padding: 10px 30px;
+  border: 0;
+  border-radius: 6px;
 }
