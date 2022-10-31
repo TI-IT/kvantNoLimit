@@ -8,12 +8,28 @@ async function save(user) {
 
   const collection = mongoose.model('users');
 
+  const username ='user' + new Date().getTime();
+
   await collection.create({
     email: user.email,
     password: user.password,
-    user: 'user' + Date.now(),
+    username: username,
     role: 'user'
   })
 }
 
-module.exports = {save}
+async function getAllUsers() {
+  await dbConnect();
+  const collection = mongoose.model('users');
+  const users = await collection.find({})
+  console.log(users)
+  return users
+}
+
+async function deleteAllUsers() {
+  await dbConnect();
+  const collection = mongoose.model('users');
+  const users = await collection.deleteMany({})
+}
+
+module.exports = {save, getAllUsers, deleteAllUsers}

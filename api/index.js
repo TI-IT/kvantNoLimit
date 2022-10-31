@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = 9001
 const cors = require('cors')
+const logger = require('morgan')
 
 app.use(cors({
   credentials: true,
@@ -14,6 +15,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
 
+app.use(logger('dev'))
 app.use(express.json())
 app.use("*", allRouter);
 app.use("/", indexRouter);

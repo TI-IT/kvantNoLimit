@@ -33,13 +33,14 @@ export default function SignUp() {
     //передаем запрос на бекент
     const res = await fetch('http://localhost:9001/users/signup', {
       method: 'post',
-      credentials: 'include',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json'
-      }
+            credentials: 'include',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
     })
     const data = await res.json();
+    console.log(data);
 
     if (data.ok) {
       setMessage('')
