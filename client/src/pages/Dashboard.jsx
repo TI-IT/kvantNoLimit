@@ -1,8 +1,10 @@
 import React from "react";
 import Menu from "../components/Menu";
+import { NavLink } from 'react-router-dom';
 
 export default function Dashboard({server_host}) {
   const [loading, setLoading] = React.useState(true)
+  const [needAuth, setNeedAuth] = React.useState(false)
   const [user, setUser] = React.useState({})
 
   React.useEffect(() => {
@@ -21,6 +23,7 @@ export default function Dashboard({server_host}) {
       setLoading(false)
       await loadData()
     }else {
+      setNeedAuth(true)
       setLoading(false)
     }
   }
@@ -32,7 +35,7 @@ export default function Dashboard({server_host}) {
     })
     const data = await res.json()
     if(data.ok) {
-      setUser(data.user)
+      setUser(data.users)
     }
   }
 
@@ -44,6 +47,14 @@ export default function Dashboard({server_host}) {
     )
   }
 
+  if (needAuth){
+    return (
+      <div className={'container text-center'}>
+        <h2>Необхадимо войти</h2>
+        <div><NavLink to={'/login'}>Перейти на форму входа</NavLink></div>
+        </div>
+    )
+  }
 
   return (
     <div>
@@ -53,6 +64,7 @@ export default function Dashboard({server_host}) {
           Личный кабинет
         </h1>
         <div>{JSON.stringify(user)}</div>
+        <span><a href={server_host + "/users/logout"}>Выход</a></span>
       </div>
       
     </div>

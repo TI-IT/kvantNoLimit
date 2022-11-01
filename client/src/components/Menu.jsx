@@ -4,10 +4,10 @@ export default function Menu() {
   return (
     <div className={'menu'}>
       <span><NavLink to={'/'}>Главная</NavLink></span>
-      <span><NavLink to={'/login'}>Вход</NavLink></span>
       <span><NavLink to={'/signup'}>Регистрация</NavLink></span>
       <span><NavLink to={'/users'}>Пользователи</NavLink></span>
       <span><NavLink to={'/dashboard'}>Личный кабинет</NavLink></span>
+      <span><NavLink to={'/login'}>Вход</NavLink></span>
     </div>
   )
 }

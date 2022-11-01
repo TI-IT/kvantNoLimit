@@ -1,11 +1,15 @@
 import React from "react";
 import Menu from "../components/Menu";
 import emailValidator from "email-validator";
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
   const [user, setUser] = React.useState({email: '', password: ''});
   const [secondPassword, setSecondPassword] = React.useState('');
   const [message, setMessage] = React.useState('');
+  const [disabled, setDisabled] = React.useState(false);
+
+  const navigate = useNavigate()
 
   function changeUser(name, value) {
     setUser({
@@ -15,18 +19,22 @@ export default function SignUp() {
   }
 
   async function signUp () {
+    setDisabled(true)
     setMessage('')
     if(!user.email || !user.password || !secondPassword) {
       setMessage("Заполните все поля")
+      setDisabled(false)
       return
     }
     if(secondPassword !== user.password) {
       setMessage('')
       setMessage("Пароли не совподают")
+      setDisabled(false)
       return
     }if (!emailValidator.validate(user.email)) {
       setMessage('')
       setMessage("Email не верный")
+      setDisabled(false)
       return
     }
 
@@ -45,7 +53,9 @@ export default function SignUp() {
     if (data.ok) {
       setMessage('')
       setMessage('регистрация прошла успешно.')
+      navigate('/dashboard')
     }else {
+      setDisabled(false)
       setMessage('')
       setMessage('Ошибка попробуйте другие данные')
     }
@@ -80,7 +90,7 @@ export default function SignUp() {
             </div>
           </div>
           <div>
-            <button type={'button'} onClick={signUp}>Зарегистрироваться</button>
+            <button type={'button'} onClick={signUp} disabled={disabled}>Зарегистрироваться</button>
           </div>
         </form>
       </div>

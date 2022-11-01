@@ -27,6 +27,9 @@ router.post('/signup', async (req, res) => {
   console.log(user);
   try {
     await save(user);
+    const doc = await getUserByEmailAndPassword(user);
+    req.session.user = {_id: doc._id};
+    req.session.save();
     res.json({ok: true});
   }catch (e) {
     console.log(e);
@@ -37,7 +40,6 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
   const user = req.body;
   const doc = await getUserByEmailAndPassword(user)
-
   if(doc) {
     req.session.user = {_id: doc._id}
     req.session.save()
@@ -47,7 +49,21 @@ router.post('/login', async (req, res) => {
   }
 })
 
+router.get('/logout', async (req, res) => {
+  // const domain = process.env.NODE_ENV === 'development' ? process.env.DEV_HOST : process.env.PROD_HOST
+  const domain = process.env.NODE_ENV === 'development' ? process.env.PROD_HOST : process.env.DEV_HOST
+
+  req.session.destroy()
+  res.clearCookie('connect.sid', {path: "/"})
+
+  res.redirect(domain)
+})
+
 router.post('/check/auth', async (req, res) => {
+  if(!req.session.user) {
+    res.json({ok: false}).end()
+    return
+  }
   const _id = req.session.user._id;
   const user = await getUserById(_id)
   
