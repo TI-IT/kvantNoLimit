@@ -10,7 +10,7 @@ async function dbConnect() {
   let url = `mongodb://localhost:27017/${dbName}`;
   let options = {
     user: "admintiit",
-    pass: "Tg30121986",
+    pass: process.env.NODE_ENV === 'development' ? MONGO_DEV_PASSWORD : MONGO_PRODUCTION_PASSWORD,
     auth: {authSource: `${dbName}`}
   }
 
