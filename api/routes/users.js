@@ -47,11 +47,9 @@ router.post('/login', async (req, res) => {
   }
 })
 
-router.post('check/auth', async (req, res) => {
+router.post('/check/auth', async (req, res) => {
   const _id = req.session.user._id;
   const user = await getUserById(_id)
-
-  console.log(req.session)
   
   if(user) {
     res.json({ok: true});
