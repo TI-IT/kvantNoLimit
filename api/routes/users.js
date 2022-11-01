@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { save, getAllUsers, deleteAllUsers, getUserByEmailAndPassword, getUserById } = require('../services/user.service');
+const { save, getAllUsers, deleteAllUsers, getUserByEmailAndPassword, getUserById, updateUser } = require('../services/user.service');
 
 router.get('/', (req, res) => {
   res.json({ok: true, users: "123"})
@@ -66,6 +66,25 @@ router.post('/check/auth', async (req, res) => {
   }
   const _id = req.session.user._id;
   const user = await getUserById(_id)
+  
+  if(user) {
+    res.json({ok: true, role: user.role});
+  } else {
+    res.json({ok: false});
+  }
+})
+
+router.post('/update', async (req, res) => {
+  if(!req.session.user) {
+    res.json({ok: false}).end()
+    return
+  }
+  const _id = req.session.user._id;
+  const user = await getUserById(_id)
+
+  const updatedUser = await updateUser(req.body)
+
+  console.log(updatedUser)
   
   if(user) {
     res.json({ok: true});

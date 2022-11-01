@@ -3,7 +3,7 @@ import Menu from "../components/Menu";
 import emailValidator from "email-validator";
 import { useNavigate } from 'react-router-dom';
 
-export default function SignUp() {
+export default function SignUp({server_host}) {
   const [user, setUser] = React.useState({email: '', password: ''});
   const [secondPassword, setSecondPassword] = React.useState('');
   const [message, setMessage] = React.useState('');
@@ -64,7 +64,7 @@ export default function SignUp() {
 
   return (
     <div>
-      <Menu />
+      <Menu server_host={server_host}/>
       <div className={'container text-center'}>
          <h1>
             Регистрация

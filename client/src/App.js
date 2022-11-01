@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Users from "./pages/Users";
 import Dashboard from "./pages/Dashboard";
+import Admin from "./pages/Admin";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
               <Route path="/signup" element={<SignUp server_host={server_host} />} />
               <Route path="/users" element={<Users server_host={server_host} />} />
               <Route path="/dashboard" element={<Dashboard server_host={server_host} />} />
+              <Route path="/admin" element={<Admin server_host={server_host} />} />
           </Routes>
       </BrowserRouter>
   );

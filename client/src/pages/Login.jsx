@@ -44,7 +44,7 @@ export default function Login({server_host}) {
 
   return (
     <div>
-      <Menu />
+      <Menu server_host={server_host}/>
       <div className={'container text-center'}>
         <h1>
           Вход

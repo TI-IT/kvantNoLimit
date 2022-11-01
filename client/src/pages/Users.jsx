@@ -1,12 +1,11 @@
 import React from "react";
 import Menu from "../components/Menu";
 
-export default function Users() {
+export default function Users({server_host}) {
 
   const [users, setUsers] = React.useState([]);
 
  React.useEffect(loadUsers, []);
-
   function loadUsers() {
     fetch('http://localhost:9001/users/get/all', {
       method: "get",
@@ -23,7 +22,7 @@ export default function Users() {
   console.log(users)
   return (
     <div>
-      <Menu />
+      <Menu server_host={server_host}/>
       <div className={'container text-center'}>
         <h1>
           Пользователи
