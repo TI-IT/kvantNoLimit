@@ -11,6 +11,7 @@ async function dbConnect() {
   let options = {
     user: "admintiit",
     pass: process.env.NODE_ENV === 'development' ? MONGO_DEV_PASSWORD : MONGO_PRODUCTION_PASSWORD,
+    // pass: process.env.NODE_ENV === 'development' ? MONGO_PRODUCTION_PASSWORD : MONGO_DEV_PASSWORD,
     auth: {authSource: `${dbName}`}
   }
 
