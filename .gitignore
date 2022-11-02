@@ -1,8 +1,8 @@
 client/node_modules
-api/node_modules
 client/package-lock.json
+api/node_modules
 api/package-lock.json
-.history
 api/.env
+.history
 .env
 .git
