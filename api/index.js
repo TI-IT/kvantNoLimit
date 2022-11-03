@@ -38,7 +38,6 @@ const allRouter = require("./routes/all");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
-
 app.use(logger('dev'))
 app.use(express.json())
 app.use("*", allRouter);
