@@ -49,9 +49,9 @@ router.post('/login', async (req, res) => {
   }
 })
 
+const processEnvNodeEnv = process.env.NODE_ENV.trim();
 router.get('/logout', async (req, res) => {
-  // const domain = process.env.NODE_ENV === 'development' ? process.env.DEV_HOST : process.env.PROD_HOST
-  const domain = process.env.NODE_ENV === 'development' ? process.env.PROD_HOST : process.env.DEV_HOST
+  const domain = processEnvNodeEnv === 'development' ? process.env.DEV_HOST : process.env.PROD_HOST;
 
   req.session.destroy()
   res.clearCookie('connect.sid', {path: "/"})

@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const processEnvNodeEnv = process.env.NODE_ENV.trim();
 
 router.all("*", (req, res, next) => {
 
-    let domain = process.env.NODE_ENV === 'development' ? process.env.DEV_HOST : process.env.PROD_HOST
-    // let domain = process.env.NODE_ENV === 'development' ?  process.env.PROD_HOST : process.env.DEV_HOST
-    
+    let domain = processEnvNodeEnv === 'development' ? process.env.DEV_HOST : process.env.PROD_HOST
     res.setHeader('Access-Control-Allow-Origin', domain);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     next()
