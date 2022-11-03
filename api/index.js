@@ -6,7 +6,6 @@ const cors = require('cors')
 const logger = require('morgan');
 const sessions = require('express-session');
 const MongoStore = require('connect-mongo');
-const processEnvNodeEnv = process.env.NODE_ENV.trim();
 
 app.use(cors({
   credentials: true,
@@ -15,7 +14,7 @@ app.use(cors({
 
 let mongoUrl
 
-if (processEnvNodeEnv === 'development') {
+if (process.env.NODE_ENV === 'development ') {
   mongoUrl = "mongodb://admintiit:" + process.env.MONGO_DEV_PASSWORD + "@localhost:27017/kvantnolimit?authSource=kvantnolimit"
 }else {
   mongoUrl = "mongodb://admintiit:" + process.env.MONGO_PRODUCTION_PASSWORD + "@localhost:27017/kvantnolimit?authSource=kvantnolimit"

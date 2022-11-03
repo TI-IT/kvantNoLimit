@@ -6,10 +6,9 @@ import SignUp from "./pages/SignUp";
 import Users from "./pages/Users";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
-const processEnvNodeEnv = process.env.NODE_ENV.trim();
 
 function App() {
-    const server_host = processEnvNodeEnv === 'development' ? 'http://localhost:9001' : 'https://kvantnolimit.ru';
+    const server_host = process.env.NODE_ENV === 'development ' ? 'http://localhost:9001' : 'https://kvantnolimit.ru';
   return (
       <BrowserRouter>
           <Routes>
