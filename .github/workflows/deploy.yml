@@ -2,7 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 jobs:
   update-files:
     timeout-minutes: 2
@@ -18,8 +18,8 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd ~/PubgMoney
-            git reset --hard origin/master
+            cd ~/kvantnolimit
+            git reset --hard origin/main
             git pull
   build-client:
     if: "contains(github.event.commits[0].message, '[need build client]')"
@@ -37,7 +37,7 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd ~/PubgMoney/client
+            cd ~/kvantnolimit/client
             npm install
             npm run build
             pm2 restart client
@@ -56,6 +56,6 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd ~/PubgMoney/api
+            cd ~/kvantnolimit/api
             npm install
             pm2 restart api
