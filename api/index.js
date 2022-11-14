@@ -3,7 +3,7 @@ const app = express()
 const port = 9001
 
 app.get('/', (req, res) => {
-  res.send('Kvantnolimit server 14/11/2022')
+  res.send('Kvantnolimit server 14')
 })
 
 app.listen(port, () => {
