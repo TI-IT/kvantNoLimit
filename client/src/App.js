@@ -1,11 +1,19 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signin from './pages/Signin';
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Kvantnolimit start</h1>
-      <h1>test</h1>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signin />} />
+    </Routes>
+  </BrowserRouter>
   );
 }
 
