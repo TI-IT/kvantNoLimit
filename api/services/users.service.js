@@ -8,7 +8,7 @@ async function addUserToDb(){
   const collection = mongoose.model('users');
 
   await collection.create({
-    username: "vwasya",
+    username: "vwwwasya",
     password: "123456",
     role: 'user'
   })

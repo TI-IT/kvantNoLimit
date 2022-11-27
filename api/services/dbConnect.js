@@ -5,7 +5,7 @@ async function dbConnect() {
     return mongoose.connection.db;
   }
 
-  let url = "mongodb://localhost:27017/kvantnolimit";
+  let url = "mongodb://127.0.0.1:27017/kvantnolimit";
   let options = {
     user: "admintiit",
     pass: "Tg30121986",
