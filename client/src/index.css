@@ -12,8 +12,37 @@ code {
     monospace;
 }
 .menu {
-  
+  padding: 10px;
 }
 .menu span {
   padding: 10px;
+}
+
+.container {
+  margin: 0 10%;
+}
+.text-center {
+  text-align: center;
+}
+form.sign-up, form.login {
+  margin-top: 50px;
+}
+form.sign-up input, form.login input {
+  font-size: 18px;
+  padding: 5px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+form.sign-up label {
+  text-align: left;
+}
+
+form.sign-up button, form.login button {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: greenyellow;
+  color: rgb(34, 27, 27);
+  padding: 10px 30px;
+  border: 0;
+  border-radius: 4px;
 }
