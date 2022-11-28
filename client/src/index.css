@@ -46,3 +46,13 @@ form.sign-up button, form.login button {
   border: 0;
   border-radius: 4px;
 }
+
+.dashboard-form {
+  
+}
+
+.dashboard-form input {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px;
+}

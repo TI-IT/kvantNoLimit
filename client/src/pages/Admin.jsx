@@ -1,10 +1,10 @@
 import React from 'react'
 import Menu from "../components/Menu";
 
-export default function Users({server_host}) {
+export default function Admin({server_host}) {
   const [users, setUsers] = React.useState([])
 
-  React.useEffect(loadUsers, [])
+   React.useEffect(loadUsers, [])
 
   function loadUsers() {
     setUsers([])
@@ -26,11 +26,26 @@ export default function Users({server_host}) {
   return (
     <div>
       <Menu server_host={server_host} />
-      <div className={'container text-center'}>
+      <div className={'container'}>
         <h1>
-          Пользователи 777
+          Admin
         </h1>
-        <div>{JSON.stringify(users)}</div>
+        <div>
+          <table>
+            <thead>
+              <td>Email</td>
+              <td>Пароль</td>
+              <td>Роль</td>
+            </thead>
+            <tbody>
+              {users.map(user => <tr>
+                <td>{user.email}</td>
+                <td>{user.password}</td>
+                <td>{user.role}</td>
+                </tr>)}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )

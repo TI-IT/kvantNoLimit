@@ -1,38 +1,43 @@
 import React from 'react'
 import emailValidator from 'email-validator'
 import Menu from "../components/Menu";
+import { useNavigate } from 'react-router-dom';
 
-export default function SignUp() {
-
+export default function SignUp({server_host}) {
   const [user, setUser] = React.useState({email: '', password: ''})
   const [secondPassword, setSecondPassword] = React.useState('')
   const [message, setMessage] = React.useState('')
+  const [disabled, setDisabled] = React.useState(false)
+  const navigate = useNavigate()
 
   function changeUser(name, value) {
     setUser({
       ...user,
       [name] : value
     })
-    console.log(user)
   }
 
-  async function signuo() {
+  async function signUo() {
+    setDisabled(true)
     setMessage('')
     if (!user.email || !user.password || !secondPassword) {
       setMessage("Заполните все поля")
+      setDisabled(false)
       return
     }
     if (secondPassword !== user.password) {
       setMessage('Пароли не совподают')
+      setDisabled(false)
       return
     }
     if (!emailValidator.validate(user.email)) {
       setMessage('Email не корректный')
+      setDisabled(false)
       return
     }
 
     //Передаем запрос на бекент
-    const res = await fetch('http://localhost:9001/users/signup', {
+    const res = await fetch(server_host + '/users/signup', {
       method: 'post',
       credentials: 'include',
       body: JSON.stringify(user),
@@ -43,14 +48,16 @@ export default function SignUp() {
     const data = await res.json();
     if (data.ok) {
       setMessage('Регистрация прошла успешно')
+      navigate('/dashboard')
     }else {
+      setDisabled(false)
       setMessage('Ошибка попробуйте другие данные')
     }
   }
 
   return (
     <div>
-      <Menu />
+      <Menu server_host={server_host} />
       <div className={'container text-center'}>
         <h1>
           Регистрация
@@ -76,7 +83,7 @@ export default function SignUp() {
             </div>
           </div>
           <div>
-            <button type={'button'} onClick={signuo}>Зарегистрироватся</button>
+            <button type={'button'} onClick={signUo} disabled={disabled}>Зарегистрироватся</button>
           </div>
           
         </form>

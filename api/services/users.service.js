@@ -38,4 +38,21 @@ async function getUserByEmailAndPassword(user) {
   return doc
 }
 
-module.exports = {save, getAllUsers, deleteAllUsers, getUserByEmailAndPassword};
+async function getUserBiId(_id) {
+await dbConnect();
+const collection = mongoose.model('users');
+const user = await collection.findOne({_id: _id});
+return user
+}
+
+async function updateUser({user}) {
+  await dbConnect();
+  const collection = mongoose.model('users');
+  const doc = await collection.findOne({_id: user._id});
+  
+  doc['username'] = user.username
+
+  await doc.save()
+  return doc
+}
+module.exports = {save, getAllUsers, deleteAllUsers, getUserByEmailAndPassword, getUserBiId, updateUser};
