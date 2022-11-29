@@ -61,6 +61,9 @@ export default function Login({server_host}) {
             <button type={'button'} onClick={login}>Войти</button>
           </div>
         </form>
+        <div className={'google-oauth-wrapper'}>
+          <a className={'google-oauth'} href={server_host + '/oauth/google'}>Войти через Google</a>
+        </div>
       </div>
     </div>
   )

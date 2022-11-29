@@ -1,6 +1,6 @@
 const dcConnect = require("./dbConnect");
 const mongoose = require("mongoose");
-const User = require('../models/user');
+const User = require('../models/User');
 const dbConnect = require("./dbConnect");
 
 async function save(user){

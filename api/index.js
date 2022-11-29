@@ -35,6 +35,7 @@ app.use(session({
 const allRouter = require("./routes/all");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const oauthRouter = require("./routes/oauth");
 
 //пути для express
 app.use(logger('dev'))
@@ -42,6 +43,7 @@ app.use(express.json())
 app.use('*', allRouter)
 app.use("/", indexRouter)
 app.use("/users", usersRouter)
+app.use("/oauth", oauthRouter)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
