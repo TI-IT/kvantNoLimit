@@ -63,6 +63,7 @@ router.post('/check/auth', async (req, res) => {
     res.json({ok: false}).end()
     return
   }
+
   const _id = req.session.user._id;
   const user = await getUserBiId(_id)
 
@@ -74,14 +75,16 @@ router.post('/check/auth', async (req, res) => {
 })
 
 router.post('/update', async (req, res) => {
+
   if (!req.session.user) {
     res.json({ok: false}).end()
     return
   }
+
   const _id = req.session.user._id;
   const user = await getUserBiId(_id)
 
-  const updateuser = updateUser(user)
+  const updateuser = await updateUser(req.body)
 
   console.log({updateuser})
 

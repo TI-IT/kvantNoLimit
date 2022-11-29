@@ -45,13 +45,15 @@ const user = await collection.findOne({_id: _id});
 return user
 }
 
-async function updateUser({user}) {
+async function updateUser(user) {
+
   await dbConnect();
   const collection = mongoose.model('users');
   const doc = await collection.findOne({_id: user._id});
   
   doc['username'] = user.username
 
+  console.log(doc)
   await doc.save()
   return doc
 }

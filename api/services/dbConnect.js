@@ -10,7 +10,7 @@ async function dbConnect() {
   let url = "mongodb://127.0.0.1:27017/kvantnolimit";
   let options = {
     user: "admintiit",
-    pass: "Tg30121986",
+    pass: process.env.NODE_ENV === "development " ? process.env.MONGO_DEV_PASSWORD : process.env.MONGO_PRODUCTION_PASSWORD,
     auth: {authSource: "kvantnolimit"}
   }
 
