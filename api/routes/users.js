@@ -1,5 +1,5 @@
 const express = require('express');
-const { save, getAllUsers, deleteAllUsers, getUserByEmailAndPassword, getUserBiId, updateUser } = require('../services/users.service');
+const { save, getAllUsers, deleteAllUsers, getUserByEmailAndPassword, getUserById, updateUser } = require('../services/users.service');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 router.get('/me', async (req, res) => {
   const _id = req.session.user._id;
-  const user = await getUserBiId(_id)
+  const user = await getUserById(_id)
 
   res.json({ok: true, user: user})
 })
@@ -65,7 +65,7 @@ router.post('/check/auth', async (req, res) => {
   }
 
   const _id = req.session.user._id;
-  const user = await getUserBiId(_id)
+  const user = await getUserById(_id)
 
     if (user) {
       res.json({ok: true, role: user.role})
@@ -82,7 +82,7 @@ router.post('/update', async (req, res) => {
   }
 
   const _id = req.session.user._id;
-  const user = await getUserBiId(_id)
+  const user = await getUserById(_id)
 
   const updateuser = await updateUser(req.body)
 
