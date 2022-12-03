@@ -27,7 +27,6 @@ router.post('/signup', async (req, res) => {
   const user = req.body
   try {
     await save(user)
-
     const doc = await getUserByEmailAndPassword(user)
     req.session.user = {_id: doc._id}
     await req.session.save()
