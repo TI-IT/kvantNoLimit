@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Dashboard({server_host}) {
 
+  React.useEffect(() => {document.title = 'Личный кабинет'}, [])
   const [loading, setLoading] = React.useState(true)
   const [needAuth, setNeedAuth] = React.useState(false)
   const [user, setUser] = React.useState({username: ''})

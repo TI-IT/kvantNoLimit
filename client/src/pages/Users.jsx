@@ -2,8 +2,9 @@ import React from 'react'
 import Menu from "../components/Menu";
 
 export default function Users({server_host}) {
-  const [users, setUsers] = React.useState([])
 
+  React.useEffect(() => {document.title = 'Пользователи'}, [])
+  const [users, setUsers] = React.useState([])
   React.useEffect(loadUsers, [])
 
   function loadUsers() {

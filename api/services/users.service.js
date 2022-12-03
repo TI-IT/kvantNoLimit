@@ -9,12 +9,15 @@ async function save(user){
   const collection = mongoose.model('users');
 
   const username = 'user' + new Date().getTime()
-  await collection.create({
+
+  const result = await collection.create({
     email: user.email,
     password: user.password,
     username: username,
     role: 'user'
   })
+
+  return result
 }
 
 async function getAllUsers() {

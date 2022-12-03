@@ -4,6 +4,8 @@ import Menu from "../components/Menu";
 import { useNavigate } from 'react-router-dom';
 
 export default function SignUp({server_host}) {
+
+  React.useEffect(() => {document.title = 'Регистрация'}, [])
   const [user, setUser] = React.useState({email: '', password: ''})
   const [secondPassword, setSecondPassword] = React.useState('')
   const [message, setMessage] = React.useState('')
@@ -85,8 +87,10 @@ export default function SignUp({server_host}) {
           <div>
             <button type={'button'} onClick={signUo} disabled={disabled}>Зарегистрироватся</button>
           </div>
-          
         </form>
+        <div className={'google-oauth-wrapper'}>
+          <a className={'google-oauth'} href={'https://api.kvantnolimit.ru/oauth/google'}>Войти через Google</a>
+        </div>
       </div>
     </div>
   )
