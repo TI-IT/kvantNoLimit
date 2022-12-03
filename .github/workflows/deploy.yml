@@ -58,4 +58,4 @@ jobs:
             source ~/.nvm/nvm.sh
             cd ~/kvantnolimit/api
             npm install
-            pm2 restart api
+            pm2 restart api --update-env
