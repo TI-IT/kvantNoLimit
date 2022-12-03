@@ -53,8 +53,7 @@ router.get('/google/redirect', async (req, res) => {
   req.session.user = {_id: _id}
   await req.session.save()
 
-  const host = process.env.NODE_ENV === 'development ' ? process.env.DEV_HOST : process.env.PROD_HOST
-  res.redirect(host + "/dashboard")
+  res.redirect("https://kvantnolimit.ru/dashboard")
 })
 
 
