@@ -1,1 +1,0 @@
-http://localhost:9001/oauth/google/redirect?code=4%2F0AfgeXvvL-BoApLY1eHO_Sh8eUwLwmBc_HD5JouQEfExU3FbuOiuObIFys55LAJ8y7dF_Lg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent
