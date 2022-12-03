@@ -9,7 +9,7 @@ import Admin from './pages/Admin';
 
 
 function App() {
-  const server_host = process.env.NODE_ENV === 'development' ? 'http://localhost:9001' : 'https://api.kvantnolimit.ru';
+  const server_host = process.env.NODE_ENV === 'development ' ? 'http://localhost:9001' : 'https://api.kvantnolimit.ru';
  
   return (
     <BrowserRouter>
