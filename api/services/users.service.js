@@ -5,7 +5,6 @@ const dbConnect = require("./dbConnect");
 
 async function save(user){
   await dcConnect();
-
   const collection = mongoose.model('users');
 
   const username = 'user' + new Date().getTime()
