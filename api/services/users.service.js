@@ -22,6 +22,7 @@ async function save(user){
 async function getAllUsers() {
   await dbConnect();
   const collection = mongoose.model('users');
+  // const users = await collection.find({}).limit(2).skip(1)
   const users = await collection.find({})
   return users
 }
@@ -69,11 +70,35 @@ async function updateUser(user) {
   return doc
 }
 
-
 async function getUserByEmail(email) {
 await dbConnect();
 const collection = mongoose.model('users');
 const user = await collection.findOne({email: email});
 return user
 }
-module.exports = {save, getAllUsers, deleteAllUsers, getUserByEmailAndPassword, getUserById, updateUser, getUserByEmail};
+
+async function getUsersByQuery({query}) {
+await dbConnect();
+const collection = mongoose.model('users');
+const user = await collection.find({
+  $and: [{
+    $or: [
+    {about: new RegExp(decodeURI(query.about), "i")},
+    {name: new RegExp(decodeURI(query.name), "i")}
+  ]
+  },
+
+]
+});
+return user
+}
+
+module.exports = {
+save, 
+getAllUsers, 
+deleteAllUsers, 
+getUserByEmailAndPassword, 
+getUserById, updateUser, 
+getUserByEmail,
+getUsersByQuery
+};

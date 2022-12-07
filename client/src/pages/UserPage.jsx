@@ -12,35 +12,33 @@ export default function UserPage({server_host}) {
   React.useEffect(loadUser, [])
 
   function loadUser() {
-    fetch(server_host + "/users/id/" + params.id, {
-      credentials: "include"
-    }).then(res => {
-      return res.json()
-    }).then(data => {
-      setLoading(false)
-      setUser(data.user)
-    }).catch(e => {
-      setLoading(false)
-      console.error(e)
-    })
-  }
+        fetch(server_host + "/users/id/" + params.id, {
+            credentials: "include"
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            setLoading(false)
+            setUser(data.user)
+        }).catch(e => {
+            setLoading(false)
+           console.error(e)
+        })
+    }
 
-  if (loading) {
+    if (loading) {
+        return <div className={'container'}><h1>Загрузка</h1></div>
+    }
+
+
     return (
-    <div className={'container'}>
-      <h1>Загрузка...</h1>Загрузка
-      </div>
+        <div>
+            <Menu server_host={server_host} />
+            <div className={'container'}>
+                <h1>{user.name}</h1>
+                <div>{user.username}</div>
+                <div>Возраст: {getAge(user.birthday)}</div>
+                <div>{user.about}</div>
+            </div>
+        </div>
     )
-  }
-  return (
-    <div>
-      <Menu server_host={server_host} />
-      <div className={'container'}>
-          <h1>{user.name}</h1>
-          <div>{user.username}</div>
-          <div>Возраст: {getAge(user.birthday)}</div>
-          <div>{user.about}</div>
-      </div>
-    </div>
-  )
 }

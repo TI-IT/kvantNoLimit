@@ -1,9 +1,25 @@
 const express = require('express');
-const { save, getAllUsers, deleteAllUsers, getUserByEmailAndPassword, getUserById, updateUser } = require('../services/users.service');
+const { save,
+  getAllUsers,
+  deleteAllUsers,
+  getUserByEmailAndPassword,
+  getUserById,
+  updateUser,
+  getUsersByQuery
+} = require('../services/users.service');
 const router = express.Router();
 
 router.get('/', (req, res) => {
   res.json({ok: true, users: "123"})
+})
+
+router.get('/search', async (req, res) => {
+
+  const query = req.query
+  console.log(query)
+
+  const users = await getUsersByQuery({query});
+    res.json({ok: true, users: users})
 })
 
 router.get('/id/:id', async (req, res) => {

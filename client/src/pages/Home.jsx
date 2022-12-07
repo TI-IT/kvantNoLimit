@@ -9,7 +9,7 @@ export default function Home({server_host}) {
       <Menu server_host={server_host} />
       <div className={'container text-center'}>
         <h1>
-          Главная 45:31
+          Главная 1:03:04
         </h1>
       </div>
     </div>
