@@ -40,10 +40,16 @@ async function getUserByEmailAndPassword(user) {
   return doc
 }
 
-async function getUserById(_id) {
+async function getUserById(_id, isAdmin) {
 await dbConnect();
 const collection = mongoose.model('users');
-const user = await collection.findOne({_id: _id});
+let user = await collection.findOne({_id: _id});
+
+if (isAdmin) {
+  user = await collection.findOne({_id: _id});
+}else {
+  user = await collection.findOne({_id: _id}, {password: 0, email: 0});
+}
 return user
 }
 
@@ -54,6 +60,9 @@ async function updateUser(user) {
   const doc = await collection.findOne({_id: user._id});
   
   doc['username'] = user.username
+  doc['name'] = user.name
+  doc['birthday'] = user.birthday
+  doc['about'] = user.about
 
   console.log(doc)
   await doc.save()

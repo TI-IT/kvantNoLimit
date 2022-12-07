@@ -6,6 +6,19 @@ router.get('/', (req, res) => {
   res.json({ok: true, users: "123"})
 })
 
+router.get('/id/:id', async (req, res) => {
+  let user
+    try {
+        const _id = req.session.user._id;
+        const me = await getUserById(_id);
+        const isAdmin = me.role === 'admin'
+        user = await getUserById(req.params.id, isAdmin);
+    } catch (e) {
+        user = await getUserById(req.params.id);
+    }
+    res.json({ok: true, user: user})
+})
+
 router.get('/me', async (req, res) => {
   const _id = req.session.user._id;
   const user = await getUserById(_id)

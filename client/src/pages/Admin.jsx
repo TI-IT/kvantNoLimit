@@ -31,6 +31,7 @@ export default function Admin({server_host}) {
         <h1>
           Admin
         </h1>
+        <div>{JSON.stringify(users)}</div>
         <div>
           <table>
             <thead>
