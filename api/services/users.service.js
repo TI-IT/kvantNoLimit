@@ -78,19 +78,23 @@ return user
 }
 
 async function getUsersByQuery({query}) {
-await dbConnect();
-const collection = mongoose.model('users');
-const user = await collection.find({
-  $and: [{
-    $or: [
-    {about: new RegExp(decodeURI(query.about), "i")},
-    {name: new RegExp(decodeURI(query.name), "i")}
-  ]
-  },
+    const now = new Date(Date.now())
+    let from = query.maxAge ? new Date().setFullYear(now.getFullYear() - parseInt(query.maxAge)) : new Date().setFullYear(1920)
+    let to = query.minAge ? new Date().setFullYear(now.getFullYear() - parseInt(query.minAge)) : new Date()
 
-]
-});
-return user
+    from = from - 1000 * 60 * 60 * 24 * 365 - 1000
+
+    await dbConnect();
+    const collection = mongoose.model('users');
+
+    const users = await collection.find({
+        $and: [
+            {about: new RegExp(decodeURI(query.about), "i")},
+            {name: new RegExp(decodeURI(query.name), "i")},
+            {birthday: {$gte: new Date(from).toISOString(), $lte: new Date(to).toISOString()}}
+        ]
+    });
+    return users
 }
 
 module.exports = {

@@ -63,7 +63,7 @@ export default function Login({server_host}) {
           </div>
         </form>
         <div className={'google-oauth-wrapper'}>
-          <a className={'google-oauth'} href={'https://api.kvantnolimit.ru/oauth/google'}>Войти через Google</a>
+          <a className={'google-oauth'} href={server_host + '/oauth/google'}>Войти через Google</a>
         </div>
       </div>
     </div>
